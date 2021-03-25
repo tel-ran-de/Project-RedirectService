@@ -1,25 +1,25 @@
 package de.telran.projectredirectservice.service;
 
-import com.google.common.hash.Hashing;
+import de.telran.projectredirectservice.model.Url;
+import de.telran.projectredirectservice.repository.UrlRepository;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 @Service
 public class RedirectService {
+    final UrlRepository urlRepository;
 
-    public String create(String longUrl) {
-        String hash_id = Hashing.murmur3_128()
-                .hashString( longUrl, StandardCharsets.UTF_8 )
-                .toString();
-
-        String shortUrl = "server/urls/" + hash_id;
-        // should be added "save" method (insert in the bd, table "urls")
-        return shortUrl;
+    public RedirectService(UrlRepository urlRepository) {
+        this.urlRepository = urlRepository;
     }
 
-    public String getLongURL(String url_code) {
-        String longUrl = " "; //get from bd LongUrl by url_code
-        return longUrl;
+    public Optional<Url> getRedirectUrl(String shortUrlCode) {
+        Optional<Url> optionalUrl = urlRepository.findByShortUrl( shortUrlCode );
+        if (optionalUrl.isPresent()) {
+            return optionalUrl;
+        } else {
+            return Optional.empty();
+        }
     }
 }
