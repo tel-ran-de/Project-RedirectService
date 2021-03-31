@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UrlShortenerController {
 
     @Autowired
-    UrlShortenerService service;
+    private UrlShortenerService service;
 
     @PostMapping("/urls")
     public ShortUrlDto generateShortUrl(LongUrlDto longUrlDto) {
