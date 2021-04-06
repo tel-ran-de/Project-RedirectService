@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.security.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
@@ -14,13 +14,14 @@ import java.security.Timestamp;
 public class Url {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(name = "short_url")
     @Setter
     private String shortUrl;
 
-    @Column(name = "long_url")
+    @Lob
+    @Column(name = "long_url", length =5000 )
     @Setter
     private String longUrl;
 
@@ -28,11 +29,11 @@ public class Url {
     @Setter
     private int customerNumber;
 
-    @Column(name = "expiration_date")
+    @Column(name = "expiration_date", columnDefinition = "DATE")
     @Setter
-    public String expirationDate;
+    public LocalDate expirationDate;
 
-    public Url(String longUrl, int customerNumber, String expirationDate, String shortUrl) {
+    public Url(String longUrl, int customerNumber, LocalDate expirationDate, String shortUrl) {
         this.longUrl = longUrl;
         this.customerNumber = customerNumber;
         this.expirationDate = expirationDate;
