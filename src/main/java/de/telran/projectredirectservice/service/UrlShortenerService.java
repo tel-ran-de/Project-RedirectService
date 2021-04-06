@@ -1,33 +1,30 @@
 package de.telran.projectredirectservice.service;
 
+import com.google.common.hash.Hashing;
 import de.telran.projectredirectservice.model.Url;
 import de.telran.projectredirectservice.repository.UrlRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class UrlShortenerService {
-    private final UrlRepository urlRepository;
-    private final GeneratorShortStringImp generatorString;
+    final UrlRepository urlRepository;
 
-    public UrlShortenerService(UrlRepository urlRepository,
-                               GeneratorShortStringImp generatorString) {
+    public UrlShortenerService(UrlRepository urlRepository) {
         this.urlRepository = urlRepository;
-        this.generatorString = generatorString;
     }
 
     public Url create(String longUrl, int customerNumber, String expirationDate){
-        Url url;
-        String shortUrl=generatorString.generateShortUrl( longUrl );
+        String shortUrl=generateShortUrl(longUrl);
 
-        if(expirationDate==null){
-            url=new Url(longUrl, customerNumber, LocalDate
-                    .parse(expirationDate)
-                    .plusDays(3), shortUrl);
-        } else{
-            url = new Url(longUrl, customerNumber, LocalDate.parse( expirationDate ), shortUrl);
-        }
+        Url url = new Url(longUrl, customerNumber, expirationDate, shortUrl);
         return urlRepository.save( url );
+    }
+
+    private String generateShortUrl(String longUrl){
+        return Hashing.murmur3_32()
+                .hashString( longUrl, StandardCharsets.UTF_8 )
+                .toString();
     }
 }

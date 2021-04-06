@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ShortUrlDto {
-    public Long id;
+    public int id;
     public String urlShort;
 }
