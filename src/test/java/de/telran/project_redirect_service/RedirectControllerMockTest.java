@@ -10,9 +10,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
@@ -30,29 +33,29 @@ public class RedirectControllerMockTest {
     private RedirectService service;
 
 
-    //Status = 200 - don't ok
     @Test
     public void testRedirect() throws Exception {
-        when(service.getRedirectUrl("http:/short"))
-                .thenReturn(Optional.empty());
+        String redirectUrl = "http://longUrl.com";
 
-        mvc.perform(get("/short")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(redirectedUrl("http:/shortf"))
+        when(service.getRedirectUrl("shorUrl"))
+                .thenReturn(Optional.of(redirectUrl));
+        System.out.println(LocalDateTime.now());
+
+       mvc.perform(get("/shorUrl"))
                 .andExpect(status().is3xxRedirection())
-                .andDo(print());
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.header().string("Location", redirectUrl))
+                .andReturn();
+
     }
 
-
-    //Status = 404 - all ok
     @Test
     public void testRedirectNotFound() throws Exception {
 
-        when(service.getRedirectUrl(""))
+        when(service.getRedirectUrl("shorUrl"))
                 .thenReturn(Optional.empty());
 
-        mvc.perform(get("/")
-                .contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/shortUrl"))
                 .andExpect(status().isNotFound())
                 .andDo(print());
 

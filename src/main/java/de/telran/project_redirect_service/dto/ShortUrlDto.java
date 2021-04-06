@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class ShortUrlDto {
     @Id
-    private int id;
+    private long id;
     private String shortUrl;
 
 

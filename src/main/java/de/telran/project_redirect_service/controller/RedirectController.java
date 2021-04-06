@@ -21,6 +21,7 @@ public class RedirectController {
     public ResponseEntity<String> redirect(@PathVariable String shortUrl) {
         Optional<String> optional = redirectService.getRedirectUrl(shortUrl);
         RedirectView redirectView = new RedirectView();
-        return optional.map(c->ResponseEntity.status(302).body(c)).orElse(ResponseEntity.notFound().build());
+        return optional.map(c->ResponseEntity.status(302).header("Location", c).body(""))
+                .orElse(ResponseEntity.notFound().build());
     }
 }

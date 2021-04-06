@@ -15,7 +15,7 @@ import java.util.Date;
 public class LongUrlDto {
 
     @Id
-    private int id;
+    private long id;
     private String longUrl;
     private int customerNumber;
     private Date expirationDate;
