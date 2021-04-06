@@ -18,8 +18,4 @@ public interface UrlRepository extends JpaRepository<Url, Long> {
 
     Optional<Url> deleteByExpirationDateBefore(LocalDateTime localDateTime);
 
-//    @Query("select * from url ")
-//    Url findByShortUrlWithExpirationDate(
-//            String shortUrl,
-//            @Param("expirationDate") String expirationDate);
 }
