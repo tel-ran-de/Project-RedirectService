@@ -21,6 +21,9 @@ public class UrlShortenerService {
     @Autowired
     private UrlRepository urlRepository;
 
+    @Autowired
+    private CacheService cacheService;
+
     public List<Url> getAllUrls() {
         return urlRepository.findAll();
     }
@@ -30,26 +33,24 @@ public class UrlShortenerService {
         return urlRepository.save(theUrl);
     }
 
-    public String generateShortUrl(UrlDto urlDto) {
-        String shortUrl = "hc" + urlDto.getLongUrl().hashCode();
-        urlDto.setShortUrl(shortUrl);
-        return shortUrl;
-
-    }
-
-    public String generateShortUrl(int customerNumber, String longUrl, Date expirationDate) {
+    public String generateShortUrl(int customerNumber, String longUrl, LocalDateTime expirationDate) {
         UrlDto urlDto = new UrlDto();
         urlDto.setCustomerNumber(customerNumber);
         urlDto.setLongUrl(longUrl);
         urlDto.setExpirationDate(expirationDate);
-        return generateShortUrl(urlDto);
+
+        String retShortUrl = cacheService.createShortUrl(urlDto);
+        if (retShortUrl!=null){
+            return retShortUrl;
+        }
+        return generateShortUrlString(urlDto.getLongUrl());
     }
 
 
 
-    private String createUrlExpirationDate() {
+    private LocalDateTime createUrlExpirationDate() {
         LocalDateTime date = LocalDateTime.now().plusDays(3);
         System.out.println(LocalDateTime.now());
-        return date.toString();
+        return date;
     }
 }

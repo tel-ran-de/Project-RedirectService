@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -16,9 +17,9 @@ import java.util.Date;
 public class UrlDto {
 
     @Id
-    private int id;
+    private Long id;
     private String longUrl;
     private String shortUrl;
     private int customerNumber;
-    private Date expirationDate;
+    private LocalDateTime expirationDate;
 }
