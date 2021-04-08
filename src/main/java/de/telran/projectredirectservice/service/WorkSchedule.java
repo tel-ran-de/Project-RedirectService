@@ -5,6 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class WorkSchedule {
@@ -17,7 +18,7 @@ public class WorkSchedule {
     @Scheduled(initialDelay = 10000, fixedDelayString = "10000")
     public void deleteExpiredURLs(){
 
-        urlRepository.deleteUrlByExpirationDateBefore(LocalDate.now());
+        urlRepository.deleteUrlByExpirationDateBefore( LocalDateTime.now());
 
     }
 }

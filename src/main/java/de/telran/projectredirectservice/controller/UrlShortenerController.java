@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class UrlShortenerController {
@@ -19,7 +21,7 @@ public class UrlShortenerController {
     }
 
     @PostMapping("/urls")
-    public ShortUrlDto createShortURLFromLong(@RequestBody LongUrlDto longUrlDto) {
+    public ShortUrlDto createShortURLFromLong(@Valid @RequestBody LongUrlDto longUrlDto) {
         Url url = service.create(longUrlDto.getLongUrl(), longUrlDto.getCustomerNumber(),
                 longUrlDto.getExpirationDate());
 

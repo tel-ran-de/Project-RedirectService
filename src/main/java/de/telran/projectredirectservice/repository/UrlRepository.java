@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +18,9 @@ import java.util.Optional;
 public interface UrlRepository extends JpaRepository<Url, Long> {
     @Query("select s from Url s where s.shortUrl = :shortUrlCode and s.expirationDate >=:currentDay")
     Optional<Url>getByShortUrlAndExpirationDate(@Param("shortUrlCode") String shortUrlCode,
-                                                @Param("currentDay") LocalDate currentDay);
+                                                @Param("currentDay") LocalDateTime date);
     @Transactional
     @Modifying
-    List<Url> deleteUrlByExpirationDateBefore(LocalDate date);
+    List<Url> deleteUrlByExpirationDateBefore(LocalDateTime date);
 
 }

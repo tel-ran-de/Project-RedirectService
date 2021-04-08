@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -31,9 +31,9 @@ public class Url {
 
     @Column(name = "expiration_date", columnDefinition = "DATE")
     @Setter
-    public LocalDate expirationDate;
+    public LocalDateTime expirationDate;
 
-    public Url(String longUrl, int customerNumber, LocalDate expirationDate, String shortUrl) {
+    public Url(String longUrl, int customerNumber, LocalDateTime expirationDate, String shortUrl) {
         this.longUrl = longUrl;
         this.customerNumber = customerNumber;
         this.expirationDate = expirationDate;
