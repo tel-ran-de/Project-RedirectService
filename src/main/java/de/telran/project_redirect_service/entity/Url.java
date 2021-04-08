@@ -11,6 +11,7 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @Getter
+@Setter
 @Table(name = "url")
 public class Url {
 
@@ -24,7 +25,6 @@ public class Url {
     private String shortUrl;
 
     @Column(name = "long_url")
-    @Setter
     private String longUrl;
 
     @Column(name = "customer_number")

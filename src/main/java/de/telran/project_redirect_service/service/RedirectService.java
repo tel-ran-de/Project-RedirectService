@@ -40,8 +40,7 @@ public class RedirectService {
                 longUrl = Optional.of(url.getLongUrl());
 
                 // add short url in Cashe
-                cacheService.createShortUrl(new UrlDto(url.getId(), url.getLongUrl(), url.getShortUrl(),
-                        url.getCustomerNumber(), url.getExpirationDate()));
+                cacheService.createShortUrl(url);
             }
         }
         return longUrl;

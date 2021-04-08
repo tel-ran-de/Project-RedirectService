@@ -34,16 +34,12 @@ public class UrlShortenerService {
     }
 
     public String generateShortUrl(int customerNumber, String longUrl, LocalDateTime expirationDate) {
-        UrlDto urlDto = new UrlDto();
-        urlDto.setCustomerNumber(customerNumber);
-        urlDto.setLongUrl(longUrl);
-        urlDto.setExpirationDate(expirationDate);
+        Url url = new Url();
+        url.setCustomerNumber(customerNumber);
+        url.setLongUrl(longUrl);
+        url.setExpirationDate(expirationDate);
 
-        String retShortUrl = cacheService.createShortUrl(urlDto);
-        if (retShortUrl != null) {
-            return retShortUrl;
-        }
-        return generateShortUrlString(urlDto.getLongUrl());
+        return cacheService.createShortUrl(url);
     }
 
 
