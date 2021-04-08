@@ -14,10 +14,10 @@ public class CacheService {
 
     private Map<String, UrlDto> cashedUrl = new HashMap<>();
 
-    public String createShortUrl(UrlDto urlDto){
+    public String createShortUrl(UrlDto urlDto) {
 
-        for (Map.Entry<String, UrlDto> entry : cashedUrl.entrySet()){
-            if (Objects.equals(urlDto, entry.getValue())){
+        for (Map.Entry<String, UrlDto> entry : cashedUrl.entrySet()) {
+            if (Objects.equals(urlDto, entry.getValue())) {
                 return entry.getKey();
             }
 
@@ -25,9 +25,9 @@ public class CacheService {
         return null;
     }
 
-    public String getLongtUrl(String shortUrl){
+    public String getLongtUrl(String shortUrl) {
         String longUrl = cashedUrl.get(shortUrl).getLongUrl();
-        if (longUrl!=null){
+        if (longUrl != null) {
             return longUrl;
         }
 

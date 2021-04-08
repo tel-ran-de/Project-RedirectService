@@ -31,7 +31,7 @@ public class RedirectService {
     public Optional<String> getRedirectUrl(String shortUrl) {
         Optional<String> longUrl = Optional.ofNullable(cacheService.getLongtUrl(shortUrl));
         if (!shortUrl.isEmpty()) {
-            if (longUrl.isPresent()){
+            if (longUrl.isPresent()) {
                 return longUrl;
             }
             url = urlRepository.findByShortUrl(shortUrl);
@@ -40,7 +40,7 @@ public class RedirectService {
                 longUrl = Optional.of(url.getLongUrl());
 
                 // add short url in Cashe
-                cacheService.createShortUrl(new UrlDto(url.getId(), url.getLongUrl(),url.getShortUrl(),
+                cacheService.createShortUrl(new UrlDto(url.getId(), url.getLongUrl(), url.getShortUrl(),
                         url.getCustomerNumber(), url.getExpirationDate()));
             }
         }
@@ -54,6 +54,6 @@ public class RedirectService {
             longUrl = urlRepository.findByShortUrlAndExpirationDateAfter(shortUrl, LocalDateTime.now()).map(Url::getLongUrl);
         }
         return longUrl;
-}
+    }
 
 }

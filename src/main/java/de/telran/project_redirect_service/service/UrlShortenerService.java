@@ -16,7 +16,7 @@ import static de.telran.project_redirect_service.service.ShortUrlGeneratorServic
 @Service
 public class UrlShortenerService {
 
-   private UrlValidator validator = new UrlValidator(new String[]{"http", "https"});
+    private UrlValidator validator = new UrlValidator(new String[]{"http", "https"});
 
     @Autowired
     private UrlRepository urlRepository;
@@ -40,12 +40,11 @@ public class UrlShortenerService {
         urlDto.setExpirationDate(expirationDate);
 
         String retShortUrl = cacheService.createShortUrl(urlDto);
-        if (retShortUrl!=null){
+        if (retShortUrl != null) {
             return retShortUrl;
         }
         return generateShortUrlString(urlDto.getLongUrl());
     }
-
 
 
     private LocalDateTime createUrlExpirationDate() {
