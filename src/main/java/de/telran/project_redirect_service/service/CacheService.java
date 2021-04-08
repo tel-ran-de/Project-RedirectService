@@ -14,15 +14,11 @@ public class CacheService {
 
     private Map<String, UrlDto> cashedUrl = new HashMap<>();
 
-    public String createShortUrl(UrlDto urlDto) {
+    public void createShortUrl(UrlDto urlDto) {
 
-        for (Map.Entry<String, UrlDto> entry : cashedUrl.entrySet()) {
-            if (Objects.equals(urlDto, entry.getValue())) {
-                return entry.getKey();
-            }
-
+        if (!cashedUrl.containsValue(urlDto)){
+            cashedUrl.put(urlDto.getShortUrl(), urlDto);
         }
-        return null;
     }
 
     public String getLongtUrl(String shortUrl) {
