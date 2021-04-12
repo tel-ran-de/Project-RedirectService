@@ -6,5 +6,5 @@ CREATE TABLE urls (
   long_url LONGTEXT,
   short_url VARCHAR(2048),
   customer_number int NOT NULL,
-  expiration_date DATE
+  expiration_date Date
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;

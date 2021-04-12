@@ -1,7 +1,6 @@
 package de.telran.projectredirectservice.service;
 
 import com.google.common.hash.Hashing;
-import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
