@@ -1,4 +1,4 @@
-package de.telran.projectredirectservice.steps;
+package de.telran.projectredirectservice.controller;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -14,7 +14,7 @@ import static de.telran.projectredirectservice.units.ApiUrls.redirectAPIUrl;
 import static de.telran.projectredirectservice.units.ApiUrls.urlShortenerAPIURL;
 import static io.restassured.RestAssured.given;
 
-public class CommonAPISteps {
+public class IntegrationTestAPISteps {
     public String codeShortUrl;
 
     @Test
