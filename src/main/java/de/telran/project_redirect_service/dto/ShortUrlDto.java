@@ -5,18 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
-@Setter
-@Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class ShortUrlDto {
-    @Id
-    private long id;
-    private String shortUrl;
 
-
+    public Long id;
+    public String shortUrl;
 }

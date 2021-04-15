@@ -1,24 +1,27 @@
 package de.telran.project_redirect_service.dto;
 
-import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@Entity
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Getter
+@Setter
 public class LongUrlDto {
 
-    @Id
-    private long id;
-    private String longUrl;
-    private int customerNumber;
-    private LocalDateTime expirationDate;
+    public Long customerNumber;
 
+    @NotBlank(message = "Please, provide a url")
+    @URL(message = "Please, provide valid url")
+    public String longUrl;
+
+    @Future(message = "The date can't be in the past. Please provide a valid date.")
+    public LocalDateTime expirationDate;
 }

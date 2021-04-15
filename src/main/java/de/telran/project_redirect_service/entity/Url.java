@@ -1,17 +1,13 @@
 package de.telran.project_redirect_service.entity;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @NoArgsConstructor
 @Getter
-@Setter
 @Table(name = "url")
 public class Url {
 
@@ -25,6 +21,7 @@ public class Url {
     private String shortUrl;
 
     @Column(name = "long_url")
+    @Setter
     private String longUrl;
 
     @Column(name = "customer_number")
@@ -39,6 +36,7 @@ public class Url {
         this.customerNumber = customerNumber;
         this.expirationDate = expirationDate;
     }
+
 
     @Override
     public String toString() {
