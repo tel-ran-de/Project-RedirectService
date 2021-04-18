@@ -1,6 +1,6 @@
 Feature: Create Short Url
 
-      @unique_urls
+  @unique_urls
   Scenario: Check unique short url
 
     When I make POST request for the endpoint 'urls'
