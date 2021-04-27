@@ -14,7 +14,6 @@ public class RedirectService {
         this.urlRepository = urlRepository;
     }
 
-
     public Optional<String> getRedirectUrl(String shortUrlCode) {
         Optional<String> longUrl = Optional.empty();
 

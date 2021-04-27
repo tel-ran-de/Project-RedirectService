@@ -1,7 +1,7 @@
 -- db schema
 # CREATE SCHEMA test;
 
-CREATE TABLE urls (
+CREATE TABLE IF NOT EXISTS urls (
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   long_url LONGTEXT,
   short_url VARCHAR(2048),
