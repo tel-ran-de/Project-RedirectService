@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS Statistics(
+    id        int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    short_url VARCHAR(2048),
+    long_url  LONGTEXT,
+    counter   int NULL DEFAULT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
